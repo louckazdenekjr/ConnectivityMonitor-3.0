@@ -1,3 +1,5 @@
+Dependency: PySimpleGUI
+
 compilation: 
 
 pyinstaller source.pyw --onefile 
