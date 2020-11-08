@@ -1,4 +1,4 @@
-Dependency: PySimpleGUI
+Dependency: PySimpleGUI, Python3
 
 compilation: 
 
