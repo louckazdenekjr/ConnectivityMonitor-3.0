@@ -18,20 +18,12 @@ refreshLock=False
 def incrementProgbarSmooth(importedSleepTime):
 	threading.Thread(target=smoothProgbar_thread, args=(window,importedSleepTime), daemon=True).start()
 
-#sound
-#server change
-#smooth progress bar
-#fix gui elements position
-#check crossplatform compatibility
-#fix timer key
-
 def Ping():
     global server
     if platform.system() == "Windows":
         response = subprocess.check_call("ping "+server+" -n 1", shell=True)
     else:
-        response = subprocess.check_call("ping -c 1" + server)
-        #response = subprocess.check_call("ping -c 1" + server, shell=True)
+        response = subprocess.check_call("ping -c 1 " + server, shell=True)
     isUpBool = False
     if response == 0:
         isUpBool = True
