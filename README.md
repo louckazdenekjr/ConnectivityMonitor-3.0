@@ -2,4 +2,4 @@
 
 Dependencies: PySimpleGUI, Python3, ping
 
-compilation: pyinstaller source.pyw --onefile
+compilation: pyinstaller main.pyw --onefile
