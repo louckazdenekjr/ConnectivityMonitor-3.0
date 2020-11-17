@@ -1,11 +1,11 @@
-# implement
+## implement
 
 sound alert,
 fix gui elements position,
 check crossplatform compatibility,
 fix timer key
 
-# optionally implement: 
+## optionally implement: 
 
 venv,
 server change,
