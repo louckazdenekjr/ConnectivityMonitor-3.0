@@ -1,3 +1,5 @@
+# ConnectivityMonitor-3.0
+
 Dependency: PySimpleGUI, Python3
 
 compilation: 
