@@ -3,7 +3,7 @@ import platform
 import time
 import threading
 import subprocess
-import playsound
+from playsound import playsound
 
 sg.theme('Topanga')
 server="www.google.com"
@@ -13,7 +13,7 @@ waitTimeFail=20
 waitTime=waitTimeSuccess
 textPinging="Pinging "+server+" ...""\n"+"Successful repetitions: "+str(repetitions)
 refreshLock=False
-#wavFile = input("Enter a wav filename: ")
+wavFile = "extra/alert_wet.wav"
 
 def incrementProgbarSmooth(importedSleepTime):
 	threading.Thread(target=smoothProgbar_thread, args=(window,importedSleepTime), daemon=True).start()
@@ -21,9 +21,11 @@ def incrementProgbarSmooth(importedSleepTime):
 def Ping():
     global server
     if platform.system() == "Windows":
-        response = subprocess.check_call("ping "+server+" -n 1", shell=True)
+        try: response = subprocess.check_call("ping "+server+" -n 1", shell=True)
+        except: return
     else:
-        response = subprocess.check_call("ping -c 1 " + server, shell=True)
+        try: response = subprocess.check_call("ping -c 1 " + server, shell=True)
+        except: return
     isUpBool = False
     if response == 0:
         isUpBool = True
@@ -44,6 +46,7 @@ def stateFail():
     global repetitions
     repetitions=0
     window["textKey"].update("Ping failed!"+"\n"+"Successful repetitions: "+str(repetitions), text_color='red')
+    playsound(wavFile)
 
 def superSleep(sleepTime):
     i = 0
@@ -95,7 +98,7 @@ def smoothProgbar_thread(window):
 layout = [
     [sg.Text(textPinging, size=(40, 2), justification='center', key="textKey")],
     [sg.T()],
-    [sg.ProgressBar(100, orientation='h', size=(23.5, 20), key='progbar')],
+    [sg.ProgressBar(100, orientation='h', size=(30, 20), key='progbar')],
     [sg.T()],
     [sg.Column(buttons), sg.Column(buttons1, size=(100,40)), sg.Column(buttons2)]
     ]
