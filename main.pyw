@@ -46,7 +46,7 @@ def stateFail():
     global repetitions
     repetitions=0
     window["textKey"].update("Ping failed!"+"\n"+"Successful repetitions: "+str(repetitions), text_color='red')
-    playsound(wavFile)
+    threading.Thread(target=sound_thread, args=(window,), daemon=True).start()
 
 def superSleep(sleepTime):
     i = 0
@@ -87,6 +87,9 @@ def refresh_ping_thread(window):
     else:
         stateFail()
         refreshLock=False
+
+def sound_thread(window):
+    playsound(wavFile)
 
 buttons = [[sg.Button("Refresh", size=(10, 1))]]
 buttons1 = [[sg.T(waitTime, size=(10, 1), justification='center', text_color="gray", key="timerKey")]]
