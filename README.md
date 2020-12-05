@@ -8,4 +8,4 @@ PySimpleGUI, Python3, ping
 
 ## build process
 
-compilation: pyinstaller main.pyw --onefile
+to make a portable binary: pyinstaller main.pyw --onefile
