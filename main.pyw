@@ -92,7 +92,7 @@ def sound_thread(window):
     playsound(wavFile)
 
 buttons = [[sg.Button("Refresh", size=(10, 1))]]
-buttons1 = [[sg.T(waitTime, size=(10, 1), justification='center', text_color="gray", key="timerKey")]]
+waitTimer = [[sg.T(waitTime, size=(10, 1), justification='center', text_color="gray", key="timerKey")]]
 buttons2 = [[sg.Button("Exit", size=(10, 1))]]
 
 def smoothProgbar_thread(window):
@@ -103,7 +103,7 @@ layout = [
     [sg.T()],
     [sg.ProgressBar(100, orientation='h', size=(30, 20), key='progbar')],
     [sg.T()],
-    [sg.Column(buttons), sg.Column(buttons1, size=(100,40)), sg.Column(buttons2)]
+    [sg.Column(buttons), sg.Column(waitTimer, size=(100,25)), sg.Column(buttons2)]
     ]
 
 window = sg.Window('Connectivity Monitor 3.0', layout, element_justification='c', finalize=True, use_default_focus=False)
