@@ -13,7 +13,7 @@ waitTimeFail=20
 waitTime=waitTimeSuccess
 textPinging="Pinging "+server+" ...""\n"+"Successful repetitions: "+str(repetitions)
 refreshLock=False
-wavFile = "extra/alert_wet.wav"
+wavFile = "extra/alert.wav"
 
 def incrementProgbarSmooth(importedSleepTime):
 	threading.Thread(target=smoothProgbar_thread, args=(window,importedSleepTime), daemon=True).start()
