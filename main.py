@@ -33,6 +33,13 @@ def Ping():
         isUpBool = False
     return isUpBool
 
+def doublePing():
+    if Ping() == True:
+        return True
+    else:
+        time.sleep(10)
+        return Ping()
+
 def statePinging():
     global repetitions
     window["textKey"].update("Pinging "+server+" ...""\n"+"Successful repetitions: "+str(repetitions), text_color='yellow')
@@ -68,7 +75,7 @@ def ping_thread(window):
         statePinging()
         time.sleep(1)
         window["progbar"].UpdateBar(0)
-        if Ping() == True:
+        if doublePing() == True:
             stateSuccess()
             superSleep(waitTimeSuccess)
         else:
@@ -81,7 +88,7 @@ def refresh_ping_thread(window):
     refreshLock=True
     statePinging()
     time.sleep(1)
-    if Ping() == True:
+    if doublePing() == True:
         stateSuccess()
         refreshLock=False
     else:
