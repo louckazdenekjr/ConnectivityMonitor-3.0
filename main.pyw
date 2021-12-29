@@ -3,17 +3,21 @@ import platform
 import time
 import threading
 import subprocess
-from playsound import playsound
+
+if platform.system() != "Windows":
+    from playsound import playsound
+else:
+    from winsound import PlaySound, SND_FILENAME
 
 sg.theme('Topanga')
-server="www.google.com"
+server="www.google.come"
 repetitions=0
 waitTimeSuccess=300
 waitTimeFail=20
 waitTime=waitTimeSuccess
 textPinging="Pinging "+server+" ...""\n"+"Successful repetitions: "+str(repetitions)
 refreshLock=False
-wavFile = "extra/alert.wav"
+wavFile = "alert.wav"
 
 def incrementProgbarSmooth(importedSleepTime):
 	threading.Thread(target=smoothProgbar_thread, args=(window,importedSleepTime), daemon=True).start()
@@ -53,7 +57,7 @@ def stateFail():
     global repetitions
     repetitions=0
     window["textKey"].update("Ping failed!"+"\n"+"Successful repetitions: "+str(repetitions), text_color='red')
-    threading.Thread(target=sound_thread, args=(window,), daemon=True).start()
+    threading.Thread(target=sound_function, args=(window,), daemon=True).start()
 
 def superSleep(sleepTime):
     i = 0
@@ -95,8 +99,11 @@ def refresh_ping_thread(window):
         stateFail()
         refreshLock=False
 
-def sound_thread(window):
-    playsound(wavFile)
+def sound_function(window):
+    if platform.system() != "Windows":
+        playsound(wavFile)
+    else:
+        PlaySound(wavFile, SND_FILENAME)
 
 buttons = [[sg.Button("Refresh", size=(10, 1))]]
 waitTimer = [[sg.T(waitTime, size=(10, 1), justification='center', text_color="gray", key="timerKey")]]
@@ -119,7 +126,7 @@ threading.Thread(target=ping_thread, args=(window,), daemon=True).start()
 
 while True:
     event, values = window.read()
-
+    
     if event == 'Refresh':
         if refreshLock==False:
             threading.Thread(target=refresh_ping_thread, args=(window,), daemon=True).start()
