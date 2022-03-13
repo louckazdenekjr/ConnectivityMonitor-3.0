@@ -10,7 +10,7 @@ else:
     from winsound import PlaySound, SND_FILENAME
 
 sg.theme('Topanga')
-server="www.google.come"
+server="www.google.com"
 repetitions=0
 waitTimeSuccess=300
 waitTimeFail=20
